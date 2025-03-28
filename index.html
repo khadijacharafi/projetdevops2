@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'accueil</title>
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+            padding: 20px;
+        }
+        
+        /* Carte principale */
+        .card {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .card-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .card-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+        
+        .card-content {
+            padding: 20px;
+        }
+        
+        /* Formulaire */
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #334155;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+        
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px 16px;
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        button:hover {
+            background-color: #2563eb;
+        }
+        
+        button.outline {
+            background-color: transparent;
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+        }
+        
+        button.outline:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Résultat */
+        .result {
+            text-align: center;
+        }
+        
+        .result p {
+            margin-bottom: 16px;
+            font-size: 18px;
+            color: #334155;
+        }
+        
+        /* Utilitaires */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title" id="title">Bienvenue</h1>
+        </div>
+        <div class="card-content">
+            <form id="nameForm">
+                <div class="form-group">
+                    <label for="name">Votre nom</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        placeholder="Entrez votre nom" 
+                        required
+                    >
+                </div>
+                <button type="submit">Valider</button>
+            </form>
+            
+            <div id="result" class="result hidden">
+                <p>Nous sommes ravis de vous accueillir!</p>
+                <button id="resetButton" class="outline">Recommencer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Éléments du DOM
+        const nameForm = document.getElementById('nameForm');
+        const nameInput = document.getElementById('name');
+        const title = document.getElementById('title');
+        const result = document.getElementById('result');
+        const resetButton = document.getElementById('resetButton');
+
+        // Gestion de la soumission du formulaire
+        nameForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const name = nameInput.value.trim();
+            if (name) {
+                // Mettre à jour le titre
+                title.textContent = `Hello ${name}`;
+                
+                // Cacher le formulaire et afficher le résultat
+                nameForm.classList.add('hidden');
+                result.classList.remove('hidden');
+            }
+        });
+
+        // Gestion du bouton de réinitialisation
+        resetButton.addEventListener('click', function() {
+            // Réinitialiser le formulaire
+            nameForm.reset();
+            
+            // Réinitialiser le titre
+            title.textContent = 'Bienvenue';
+            
+            // Afficher le formulaire et cacher le résultat
+            nameForm.classList.remove('hidden');
+            result.classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
